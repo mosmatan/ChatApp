@@ -1,0 +1,126 @@
+<div class="container border rounded">
+    <div class="row">
+      <div class="col-10" >
+        <h2>{{user?.fullName}}</h2>
+      </div>
+      <div class="col text-center">
+          
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-4">
+        <div class="btn-group" role="group" aria-label="Default button group">
+          <button type="button" class="btn btn-outline-primary" style=" width: 207px;" (click)="this.changeToConversationMode()">Conversation</button>
+          <button type="button" class="btn btn-outline-primary" style=" width: 207px;" (click)="this.changeToContactMode()">Contacts</button>
+        </div>
+      </div>
+      <div class="col text-end">
+        <button class="btn btn-outline-primary" style="width: 100px;" (click)="logOut()" >Log Out</button>
+      </div>
+
+    </div>
+    <div class="row">
+        <div class="col-4" >
+          <form [formGroup]="selectorForm">
+            <div class="list-group" *ngIf="this.isConversationMode == true" formGroupName="selectorDisplayer">
+              <a  class="list-group-item list-group-item-action" aria-current="true"
+              *ngFor="let conversation of user?.conversations" (click)="selectConversation(conversation.conversationId, conversation.name)">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">{{conversation.name}}</h5>
+                </div>
+              </a>
+            </div>
+            <div class="list-group" *ngIf="this.isConversationMode == false" formGroupName="selectorDisplayer">
+              <a  class="list-group-item list-group-item-action" aria-current="true" (click)="this.selectFindContacts()">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">Find Contects</h5>
+                </div>
+                <p class="mb-1">Find users to connect with</p>
+              </a>
+              <a  class="list-group-item list-group-item-action" aria-current="true" (click)="this.selectResponseConnectRequestMode()">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">Response Connect Request</h5>
+                </div>
+                <p class="mb-1">Accept or Decline connect request</p>
+              </a>
+            </div>
+          </form>
+            
+        </div>
+        <div class="col">  
+          <form action="" [formGroup]="dataForm" class="border rounded" style="height: 500px; width:auto;">
+            <div class="row"></div>
+            <div class="container" *ngIf="this.isConversationMode">
+              <div #scrollerContainer class="message-container mb-4 my-3 mx-2" style="max-height: 400px; overflow-y: auto;">
+                <div class="card mb-3" style="width: 18rem;" *ngFor="let message of activedConversation?.messages">
+                  <div class="card-header">
+                    {{message.senderUsername}}
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{message.content}}</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row" >
+                <div class="col-9">
+                  <input type="text" class="form-control mx-2" style="width: 675px;" formControlName="messageSender" >
+                </div>
+                <div class="col text-end">
+                  <button class="btn btn-primary btn-sm me-2" (click)="sendMessage()" style="width: 125px;">Send</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="container" *ngIf="this.isFindContactsMode == true">
+
+              <div class="row my-3" >
+                <div class="col-9">
+                  <input type="text" class="form-control mx-2" style="width: 675px;" formControlName="txtStartWith">
+                </div>
+                <div class="col text-end">
+                  <button class="btn btn-primary btn-sm me-2 mt-1"  style="width: 125px;" (click)="this.findContactsStartWith()">Search</button>
+                </div>
+              </div>
+              <div class="row mx-3">
+                <table class="table table-striped text-start">
+                  <th>Username</th>
+                  <th>Name</th>
+                  <th>Action</th>
+  
+                  <tr *ngFor="let contact of this.contactsStartWith">
+                    <td>{{contact.username}}</td>
+                    <td>{{contact.fullName}}</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm" (click)="this.sendConnectRequestTo(contact.userId)">Connect</button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              
+            </div>
+
+            <div class="container" *ngIf="this.isResponseConnectRequestMode == true" formGroupName="connectionRequestDisplayer">
+              <table class="table table-striped text-start mx-3">
+                <th>Username</th>
+                <th>Name</th>
+                <th>Action</th>
+
+                <tr *ngFor="let request of this.connectionRequests">
+                  <td>{{request.requesterUsername}}</td>
+                  <td>{{request.requesterFullName}}</td>
+                  <td>
+                    <button class="btn btn-primary btn-sm" (click)="this.responseToConnectionRequest(request.id, true)">Accept</button>
+                    <button class="btn btn-danger btn-sm" (click)="this.responseToConnectionRequest(request.id, false)">Decline</button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+          </form>       
+        </div>
+    </div>
+</div>
+
+
+

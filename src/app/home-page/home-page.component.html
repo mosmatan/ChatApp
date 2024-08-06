@@ -1,0 +1,21 @@
+<form class="text-center mx-auto my-5 py-3 border rounded w-50" (ngSubmit)="onSubmit()">
+    <div>
+        <h2 class="mb-3">Welcome To ChatApp</h2>
+    </div>
+    <div>
+        <div class="mb-3">Login</div>
+        <div class="mx-auto mb-3">
+            <label for="UsernameInput">Username:</label>
+            <input type="text" class="form-control w-25 mx-auto" name="username" [(ngModel)]="user.username">
+        </div>
+        <div class="mx-auto mb-3">
+            <label for="PasswordInput">Password:</label>
+            <input type="password" class="form-control w-25 mx-auto" name="password" [(ngModel)]="user.password">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary me-3">Login</button>
+            <button type="button" class="btn btn-primary ms-3" routerLink="/register">Sign In</button>
+        </div>
+    </div>
+
+</form>
