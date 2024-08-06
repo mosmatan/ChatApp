@@ -2,6 +2,13 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.1.
 
+## Overview
+This project is an Angular application that interfaces with an ASP.NET [chat server](https://github.com/mosmatan/ChatAppAPI). It allows users to register, authenticate, start conversations, and send messages. This client application provides a user-friendly interface to interact with the chat server.
+
+## Features
+<strong>User Registration and Authentication:</strong> Users can register and log in through the Angular app.<br>
+<strong>Conversations:</strong> Users can start conversations with other registered users and send messages.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
