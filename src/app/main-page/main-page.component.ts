@@ -181,7 +181,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
 
   findContactsStartWith(){
     console.log(this.dataForm.value.txtStartWith)
-    this.userService.GetContectStartWith(this.dataForm.value.txtStartWith).subscribe({
+    this.userService.GetContactStartWith(this.dataForm.value.txtStartWith).subscribe({
       next: (contacts) =>{
         this.contactsStartWith = contacts;
         console.log(contacts[0]);

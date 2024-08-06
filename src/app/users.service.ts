@@ -48,7 +48,7 @@ export class UsersService {
     return this.http.get<User>(`${this.apiUrl}login?username=${user.username}&password=${user.password}`);
   }
 
-  GetContectStartWith(startWith : string):Observable<UserContact[]>{
+  GetContactStartWith(startWith : string):Observable<UserContact[]>{
     return this.http.get<UserContact[]>(`${this.apiUrl}contact/startwith/${startWith}`);
   }
 
